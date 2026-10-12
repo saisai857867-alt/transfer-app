@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Transfer</title>
+    <!-- PWA Manifest & Meta Tags -->
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Fast%20Transfer%22,%22short_name%22:%22Transfer%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22#ffffff%22,%22theme_color%22:%22#003366%22}">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2830/2830284.png">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2830/2830284.png">
+    
+    <style>
+        body { font-family: sans-serif; background: #f0f0f0; margin: 0; padding: 15px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #003366; font-size: 18px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        button { width: 100%; padding: 12px; background: #000066; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        
+        /* Result Screen Style */
+        #resultScreen { display: none; }
+        .success-banner { background: #008000; color: white; padding: 15px; text-align: center; font-size: 14px; border-radius: 4px; margin-bottom: 20px; font-weight: bold; }
+        .res-item { margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        .res-label { font-size: 12px; color: #666; }
+        .res-value { font-size: 16px; font-weight: bold; color: #000; margin-top: 3px; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="formScreen">
+    <h2>FAST TRANSFER - INPUT</h2>
+    <div class="form-group">
+        <label>Reference Number</label>
+        <input type="text" id="refNo" value="581342030716429">
+    </div>
+    <div class="form-group">
+        <label>From Account</label>
+        <input type="text" id="fromAcc" value="00351199962917201">
+    </div>
+    <div class="form-group">
+        <label>Beneficiary Account</label>
+        <input type="text" id="toAcc" value="468743578634677475">
+    </div>
+    <div class="form-group">
+        <label>Beneficiary Name</label>
+        <input type="text" id="toName" value="DAW YAMONE THIN">
+    </div>
+    <div class="form-group">
+        <label>Amount (MMK)</label>
+        <input type="text" id="amount" value="MMK 16,348,500.00">
+    </div>
+    <div class="form-group">
+        <label>Transfer Date</label>
+        <input type="text" id="date" value="11-10-2026">
+    </div>
+    <button onclick="showConfirm()">CONFIRM</button>
+</div>
+
+<div class="container" id="resultScreen">
+    <h2>FAST TRANSFER - CONFIRM</h2>
+    <div class="success-banner" id="resBanner">
+        Transaction with reference number...
+    </div>
+    
+    <div class="res-item">
+        <div class="res-label">From Account</div>
+        <div class="res-value" id="rFrom"></div>
+    </div>
+    <div class="res-item">
+        <div class="res-label">Beneficiary Account</div>
+        <div class="res-value" id="rToAcc"></div>
+    </div>
+    <div class="res-item">
+        <div class="res-label">Beneficiary Name</div>
+        <div class="res-value" id="rToName"></div>
+    </div>
+    <div class="res-item">
+        <div class="res-label">Amount</div>
+        <div class="res-value" id="rAmount"></div>
+    </div>
+    <div class="res-item">
+        <div class="res-label">Transfer Date</div>
+        <div class="res-value" id="rDate"></div>
+    </div>
+    <button onclick="goBack()">OK</button>
+</div>
+
+<script>
+    function showConfirm() {
+        let ref = document.getElementById('refNo').value;
+        document.getElementById('resBanner').innerText = "Transaction with reference number " + ref + " is in Accepted state.";
+        
+        document.getElementById('rFrom').innerText = document.getElementById('fromAcc').value;
+        document.getElementById('rToAcc').innerText = document.getElementById('toAcc').value;
+        document.getElementById('rToName').innerText = document.getElementById('toName').value;
+        document.getElementById('rAmount').innerText = document.getElementById('amount').value;
+        document.getElementById('rDate').innerText = document.getElementById('date').value;
+        
+        document.getElementById('formScreen').style.display = 'none';
+        document.getElementById('resultScreen').style.display = 'block';
+    }
+
+    function goBack() {
+        document.getElementById('resultScreen').style.display = 'none';
+        document.getElementById('formScreen').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
